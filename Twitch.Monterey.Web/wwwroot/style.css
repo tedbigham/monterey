@@ -1,0 +1,18 @@
+
+#rooms {
+	top: 50px;
+	left: 10px;
+	width: 75px;
+	height: 40px;
+	border: black;
+	border-style: solid;
+}
+
+#roomsList {
+	top: 90px;
+	left: 10px;
+	width: 200px;
+	height: 400px;
+	border: black;
+	border-style: solid;
+}
