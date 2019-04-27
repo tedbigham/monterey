@@ -8,7 +8,8 @@ window.onload = () => {
 	$('#listRooms').click(listRooms);
 	$('#createRoom').click(createRoom);
 	$('#deleteRoom').click(deleteRoom);
-	$('#joinRoom').click(joinRoom);
+    $('#joinRoom').click(joinRoom);
+    $('#listUsers').click(listUsers);
 	$('#sendMessage').click(sendMessage);
 	$('#clear').click(clear);
 
@@ -37,7 +38,7 @@ window.onload = () => {
 	function send(message) {
 		var json = JSON.stringify(message);
 		log(json);
-		ws.send(json);
+		return ws.send(json);
 	}
 
 	function log(message) {
@@ -79,21 +80,28 @@ window.onload = () => {
     function createRoom() {
 		send({
 			op: "create-room",
-			room: $('#createRoomName').val()
+            room: $('#room').val()
 		});
+		setTimeout(joinRoom, 1000);
     }
 	function deleteRoom() {
 		send({
 			op: "delete-room",
-			room: $('#deleteRoomName').val()
+            room: $('#room').val()
 		});
 	}
-	function joinRoom() {
-		send({
-			op: "join-room",
-			room: $('#joinRoomName').val()
-		});
-	}    
+    function joinRoom() {
+        send({
+            op: "join-room",
+            room: $('#room').val()
+        });
+    }    
+    function listUsers() {
+        send({
+            op: "list-users",
+            room: $('#room').val()
+        });
+    }    
 	function sendMessage() {
 		send({
 			op: "message",

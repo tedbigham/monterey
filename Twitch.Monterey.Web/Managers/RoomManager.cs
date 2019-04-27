@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using ServiceStack.Script;
 using Twitch.Monterey.Web.Contracts;
 using Twitch.Monterey.Web.DB;
 using Twitch.Monterey.Web.Models;
@@ -43,13 +41,16 @@ namespace Twitch.Monterey.Web.Managers
             // delete the room from the db
             var room = _roomDatabase.Load(name);
 
-            if (room == null)  // already deleted???
+            // already deleted from the db?
+            if (room == null)  
             {
+                // maybe it was only in memory
                 if (rooms.ContainsKey(name))
                 {
                     rooms.Remove(name);
+                    return;
                 }
-                return;
+                throw new RoomNotFoundException("room not found: " + name);
             }
 
             if (room.Owner != owner)
@@ -88,8 +89,8 @@ namespace Twitch.Monterey.Web.Managers
     public class ChatRoom
     {
         public string Name;
-        private event Action<ChatMessage> OnChatMessage;
-        private event Action<List<string>> QueryUserName;
+        private event Action<ChatMessage> OnChatMessage = delegate { };
+        private event Action<List<string>> QueryUserName = delegate { };
 
         public void Subscribe(ClientSocket socket)
         {

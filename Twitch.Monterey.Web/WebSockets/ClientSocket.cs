@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack.Text;
 using Twitch.Monterey.Web.Contracts;
-using Twitch.Monterey.Web.DB;
 using Twitch.Monterey.Web.Managers;
 using Twitch.Monterey.Web.Models;
 

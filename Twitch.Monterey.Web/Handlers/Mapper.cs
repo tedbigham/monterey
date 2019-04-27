@@ -1,6 +1,5 @@
+using System;
 using System.Collections.Generic;
-using Twitch.Monterey.Web.DB;
-using Twitch.Monterey.Web.Managers;
 
 namespace Twitch.Monterey.Web.Contracts
 {
@@ -9,16 +8,16 @@ namespace Twitch.Monterey.Web.Contracts
     {
         private Dictionary<string, MessageHandler> handlers = new Dictionary<string, MessageHandler>();
 
-        public Mapper(UserDatabase userDatabase, RoomDatabase roomDatabase, RoomManager roomManager)
+        public Mapper(IServiceProvider services)
         {
-            handlers["auth"] = new AuthHandler(userDatabase, roomManager);
-            handlers["message"] = new ChatMessageHandler(roomManager);
-            handlers["create-room"] = new CreateRoomHandler(roomManager);
-            handlers["delete-room"] = new DeleteRoomHandler(roomManager, userDatabase);
-            handlers["join-room"] = new JoinRoomHandler(userDatabase, roomManager);
-            handlers["leave-room"] = new LeaveRoomHandler(userDatabase, roomManager);
-            handlers["list-rooms"] = new ListRoomsHandler(roomDatabase);
-            handlers["list-users"] = new ListUsersHandler(roomManager);
+            handlers["auth"] = new AuthHandler(services);
+            handlers["message"] = new ChatMessageHandler(services);
+            handlers["create-room"] = new CreateRoomHandler(services);
+            handlers["delete-room"] = new DeleteRoomHandler(services);
+            handlers["join-room"] = new JoinRoomHandler(services);
+            handlers["leave-room"] = new LeaveRoomHandler(services);
+            handlers["list-rooms"] = new ListRoomsHandler(services);
+            handlers["list-users"] = new ListUsersHandler(services);
         }
 
         public MessageHandler GetHandler(string op)

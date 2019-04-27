@@ -14,25 +14,29 @@
 	<hr>
 	<fieldset>
 		<legend>Create User</legend>
-		Name: <input id="newName" type="text"><br>
-		Password: <input id="newPassword" type="text"><br>
+        Name: <input id="newName" type="text"><p>
+        Password: <input id="newPassword" type="text" /><p>
 		<button id="createUser">Create</button>
    </fieldset>
 
 	<fieldset disabled class="wsgroup">
 		<legend>Login</legend>
-		Name: <input id="user" type="text"><br>
-		Password: <input id="password" type="text"><br>
+		Name: <input id="user" type="text"><p>
+		Password: <input id="password" type="text"><p>
 		<button id="login">Authenticate</button>
    </fieldset>
 
 	<fieldset disabled class="wsgroup">
 		<legend>Rooms</legend>
-		<button id="listRooms">List Rooms</button><p>		
-		<button id="createRoom">Create Room</button><input id="createRoomName"><br>
-		<button id="deleteRoom">Delete Room</button><input id="deleteRoomName"><br>
-		<button id="joinRoom">Join Room</button><input id="joinRoomName"><br>
-   </fieldset>
+        <button id="listRooms">List Rooms</button><p>
+        <div>
+            Room: <input id="room"><br />
+            <button id="createRoom">Create</button>
+            <button id="deleteRoom">Delete</button>
+            <button id="joinRoom">Join</button>
+            <button id="listUsers">List Users</button>
+        </div>
+        </fieldset>
    
    	<fieldset disabled class="wsgroup">
 		<legend>Messages</legend>

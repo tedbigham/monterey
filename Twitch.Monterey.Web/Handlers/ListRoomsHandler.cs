@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Twitch.Monterey.Web.DB;
 using Twitch.Monterey.Web.WebSockets;
 
@@ -8,9 +10,9 @@ namespace Twitch.Monterey.Web.Contracts
     {
         private readonly RoomDatabase _roomDatabase;
 
-        public ListRoomsHandler(RoomDatabase roomDatabase)
+        public ListRoomsHandler(IServiceProvider services)
         {
-            _roomDatabase = roomDatabase;
+            _roomDatabase = services.GetService<RoomDatabase>();
         }
 
         public override async Task HandleMessage(object message, ClientSocket socket)

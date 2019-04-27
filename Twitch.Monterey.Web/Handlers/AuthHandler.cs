@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Twitch.Monterey.Web.DB;
 using Twitch.Monterey.Web.Managers;
 using Twitch.Monterey.Web.WebSockets;
@@ -11,10 +12,10 @@ namespace Twitch.Monterey.Web.Contracts
         private readonly UserDatabase _userDatabase;
         private readonly RoomManager _roomManager;
 
-        public AuthHandler(UserDatabase userDatabase, RoomManager roomManager)
+        public AuthHandler(IServiceProvider services)
         {
-            _userDatabase = userDatabase;
-            _roomManager = roomManager;
+            _userDatabase = services.GetService<UserDatabase>();
+            _roomManager = services.GetService<RoomManager>();
         }
 
         public override async Task HandleMessage(object message, ClientSocket socket)
